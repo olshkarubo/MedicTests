@@ -5,21 +5,22 @@ const { users } = require('../../test-data/users');
 const { userData } = require('../../test-data/data');
 const config = require("../../playwright.config");
 
-let userPage;
+
+let loginPage;
 const env = config.default.use.env;
 
 
-test.describe('User Buttons', () => {
+test.describe('Userpage tests', () => {
 
     test.beforeEach(async ({ page }) => {
-        userPage = new userPage(page);
-         await userPage.open();
+        loginPage = new LoginPage(page);
+         await loginPage.open();
+         await loginPage.login(users[env].user.email, users[env].user.password);
+      
     });
-    
-    test (async ({ page }) => {
-         await userPage.login(users[env].user.email, users[env].user.password);
-         await expect(page).toHaveURL('http://omega-stage.qa.nolimit.school/vertical/default-dashboard');
-         await userPage.openAppointmentslink();
+
+    test ('Open appointments by user', async ({ page }) => {
+         await userPage.openAppointments();
          await expect(page).toHaveURL('http://omega-stage.qa.nolimit.school/vertical/appointments');
     });
 
