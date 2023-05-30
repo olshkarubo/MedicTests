@@ -1,10 +1,10 @@
 const { BasePage } = require("./basePage");
 exports.UserPage = class UserPage extends BasePage {
     constructor(page) {
-        super(page, '/vertical/default-dashboard');
+        super(page, '/vertical/appointments');
         this.Appointments = page.locator("//span[contains(text(),'Appointments')]");
-        this.Doctors = page.getByText('Doctors');
-        this.Departments = page.getByText('Departments');
+        this.Doctors = page.locator("//span[contains(text(),'Doctors')]");
+        this.Departments = page.locator("//span[contains(text(),'Departments')]");
         this.DropdownButton = page.getByRole('tc-dropdown-button', "[class='dropdown-link-wrap']");
 
     }
